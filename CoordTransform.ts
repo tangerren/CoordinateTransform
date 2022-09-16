@@ -71,6 +71,12 @@ class CoordTransform {
     }
   };
 
+  /** BD09 转 WGS84 */
+  static Bd09ToWGS84 = function (bd_lon: number, bd_lat: number) {
+    let gjc02 = this.Bd09ToGcj02(bd_lon, bd_lat);
+    return this.Gcj02ToWgs84(gjc02[0], gjc02[1]);
+  };
+  
   static transformLat = function (lng: number, lat: number) {
     let ret = -100.0 + 2.0 * lng + 3.0 * lat + 0.2 * lat * lat + 0.1 * lng * lat + 0.2 * Math.sqrt(Math.abs(lng));
     ret += ((20.0 * Math.sin(6.0 * lng * this.PI) + 20.0 * Math.sin(2.0 * lng * this.PI)) * 2.0) / 3.0;
